@@ -1,0 +1,58 @@
+.Home {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--primaryMedium);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* position: relative; */
+}
+
+.Header {
+  padding: 12px;
+  font-family: 'Equilibrium';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Header img {
+  width: 36px;
+  height: 36px;
+  display: inline-block;
+  margin-right: 16px;
+}
+
+.Header h1 {
+  font-size: 48px;
+  padding-top: 12px;
+}
+
+.Footer {
+  width: 100%;
+  padding: 12px;
+  /* position: absolute; */
+  /* bottom: 0; */
+  text-align: center;
+}
+
+.FooterHeart {
+  height: 1em;
+  position: relative;
+  top: 2px;
+}
+
+.FooterAuthor {
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.FooterAuthor:hover {
+  color: var(--accentDark)
+}
+
+.Main {
+  flex-grow: 1; 
+  border: 1px solid black;
+}

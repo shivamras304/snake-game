@@ -6,12 +6,13 @@ import Home from './containers/Home'
 class App extends Component {
   render() {
     return (
-      <div>
-        <Switch>
+      <React.Fragment>
+        <Home />
+        {/* <Switch>
           <Route path='/' component={Home}></Route>
           <Route path='/test' component={ComponentTester} />
-        </Switch>
-      </div>
+        </Switch> */}
+      </React.Fragment>
     );
   }
 }

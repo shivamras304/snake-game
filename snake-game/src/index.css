@@ -1,17 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+@font-face {
+  font-family: 'Equilibrium';
+  src: url('./assets/fonts/CHE-EQUI.TTF')
+}
+
 * {
   margin: 0;
   padding: 0;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+:root {
+  font-family: 'Open Sans', sans-serif;
+
+  --primaryMedium: #0DC5C1;
+  --primary: #009688;
+  --primaryDark: #00695C;
+  --primaryLight: #A7FFEB;
+
+  --accent: #C6FF00;  
+  --accentDark: #AEEA00;
 }

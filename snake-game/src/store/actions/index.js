@@ -1,8 +1,9 @@
 export {
-  gameReady,
+  setGameReady,
   gamePlaying,
   gamePaused,
   gameOver,
+  updateHighScore,
   moveSnake,
   changeSnakeDirection,
   eatFood,
@@ -10,6 +11,7 @@ export {
 } from './game'
 
 export {
+  authSignIn,
   authSuccessful,
   authFailed,
   authLogout

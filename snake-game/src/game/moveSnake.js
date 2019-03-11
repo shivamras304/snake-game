@@ -1,6 +1,6 @@
 import { store } from '../index'
 import { GRID_COLUMNS, GRID_INVALID } from '../utils/constants'
-import { moveSnake as moveSnakeAction, gameOver, eatFood, levelUp } from '../store/actions'
+import { moveSnake as moveSnakeAction, eatFood, levelUp, gameOver, updateHighScore } from '../store/actions'
 import { getFoodCell } from './gameSetup';
 
 //Try using store.subscribe to access the latest state
@@ -20,6 +20,9 @@ const moveSnake = () => {
   const direction = currentGameState.game.direction
   const grid = currentGameState.game.grid
   let foodCell = currentGameState.game.foodCell
+  const score = currentGameState.game.score
+  let highScore = currentGameState.game.highScore
+  const userUid = currentGameState.auth.user.uid
 
   // Adding a new Head
   snake.unshift(
@@ -45,7 +48,11 @@ const moveSnake = () => {
   }
   
   if (snake[0] === GRID_INVALID || snake.lastIndexOf(snake[0]) !== 0) {
+    if (!highScore || score > highScore) {
+      highScore = score
+    }
     store.dispatch(gameOver())
+    store.dispatch(updateHighScore(userUid, highScore))
   } else {
     store.dispatch(moveSnakeAction(snake))
   }

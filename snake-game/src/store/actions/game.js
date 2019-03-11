@@ -1,9 +1,30 @@
 import * as actionTypes from './actionTypes'
+import firebase from '../../utils/initFirebase'
 
 export const gameReady = (payload) => {
   return {
     type: actionTypes.GAME_READY,
     ...payload
+  }
+}
+
+export const setGameReady = (userUid, payload) => {
+  return dispatch => {
+    // Fetch highScore if available
+    firebase.firestore().collection('users').doc(userUid)
+      .get()
+      .then(doc => {
+        console.log(doc.data())
+        console.log(payload)
+        dispatch(gameReady({
+          ...payload,
+          highScore: doc.data().highScore || 0
+        }))
+      })
+      .catch(error => {
+        console.log(error)
+        dispatch(gameReady(payload))
+      })
   }
 }
 
@@ -21,10 +42,28 @@ export const gamePaused = (payload) => {
   }
 }
 
-export const gameOver = (payload) => {
+export const gameOver = () => {
   return {
-    type: actionTypes.GAME_OVER,
-    ...payload
+    type: actionTypes.GAME_OVER
+  }
+}
+
+export const updateHighScore = (userUid, highScore) => {
+  console.log(userUid, highScore)
+  return dispatch => {
+    firebase.firestore().collection('users').doc(userUid)
+    .set({
+      highScore
+    }, {
+      merge: true
+    })
+    .then(() => dispatch(gameReady({
+      highScore
+    })))
+    .catch(error => {
+      console.log(error)
+      // dispatch()
+    })
   }
 }
 

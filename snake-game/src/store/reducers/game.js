@@ -2,6 +2,10 @@ import * as actionTypes from '../actions/actionTypes'
 import updateObject from '../../utils/updateObject'
 import * as constants from '../../utils/constants'
 import { moveSnake as moveSnakeHelper } from '../../game/moveSnake'
+import { getInitialSnake, getFoodCell } from '../../game/gameSetup'
+
+// TODO: Move all logic from reducers to actions
+// Reducers should only be pure functions
 
 const initialState = {
   gameState: constants.GAME_NULL,
@@ -14,18 +18,20 @@ const initialState = {
   freezeSnake: null,
   snakeSpeed: 500,
   score: 0,
+  highScore: 0,
   scoreAdder: 5
 }
 
 const gameReady = (state, action) => {
   return updateObject(state, {
     gameState: constants.GAME_READY,
-    mRows: action.mRows,
-    nCols: action.nCols,
-    grid: action.grid,
-    foodCell: action.foodCell,
-    snake: action.snake,
-    score: 0
+    mRows: action.mRows || state.mRows,
+    nCols: action.nCols || state.nCols,
+    grid: action.grid || state.grid,
+    foodCell: action.foodCell || getFoodCell(),
+    snake: action.snake || getInitialSnake(),
+    score: 0,
+    highScore: action.highScore
   })
 }
 

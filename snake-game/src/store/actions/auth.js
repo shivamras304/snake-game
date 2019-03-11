@@ -1,4 +1,24 @@
 import * as actionTypes from './actionTypes'
+import firebase from '../../utils/initFirebase'
+
+export const authSignIn = (user) => {
+  return dispatch => {
+      firebase.firestore().collection('users').doc(user.uid)
+      .set({
+        name: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        providerId: user.providerId
+      }, {
+        merge: true
+      })
+      .then(() => dispatch(authSuccessful(user)))
+      .catch((error) => {
+        console.log(error)
+        dispatch(authFailed())
+      })
+  }
+}
 
 export const authSuccessful = (user) => {
   return {

@@ -1,17 +1,11 @@
 import React, { Component } from 'react'
 import styles from './index.module.css'
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import firebase from '../../utils/initFirebase' 
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions'
 import { NULL_USER } from '../../utils/constants'
 import Spinner from '../../components/Spinner'
-
-firebase.initializeApp({
-  apiKey: 'AIzaSyBc3wyVR4TULTkuiS9j1XBXQ_4ZcTGV6cY',
-  authDomain: 'sr-snake-game.firebaseapp.com',
-});
 
 class Auth extends Component {
 
@@ -38,7 +32,7 @@ class Auth extends Component {
         if (user) {
           user = user.providerData[0]
           delete user.phoneNumber
-          this.props.onAuthSuccessful(user)
+          this.props.onAuthSignIn(user)
         } else {
           this.props.onAuthFailed()
         }
@@ -92,7 +86,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuthSuccessful: (user) => dispatch(actions.authSuccessful(user)),
+    onAuthSignIn: (user) => dispatch(actions.authSignIn(user)),
+    // onAuthSuccessful: (user) => dispatch(actions.authSuccessful(user)),
     onAuthFailed: (user) => dispatch(actions.authFailed()),
     onAuthLogout: (user) => dispatch(actions.authLogout())
   }

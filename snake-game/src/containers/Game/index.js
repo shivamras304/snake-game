@@ -14,7 +14,7 @@ class Game extends Component {
     const foodCell = getFoodCell()
     const snake = getInitialSnake()
 
-    this.props.onGameReady({
+    this.props.onSetGameReady(this.props.userUid, {
       mRows, nCols, grid, foodCell, snake
     })
   }
@@ -91,6 +91,7 @@ class Game extends Component {
       <div onKeyDown={this.keyDownHandler}>
         {board}
         <div>Score: {this.props.score}</div>
+        <div>HighScore: {this.props.highScore}</div>
         <br/>
         <button data-state={constants.GAME_PLAYING} className={styles.Button} onClick={this.changeGameStateHandler}>Play Game</button>
         <button data-state={constants.GAME_PAUSED} className={styles.Button} onClick={this.changeGameStateHandler}>Pause Game</button>
@@ -110,13 +111,15 @@ const mapStateToProps = state => {
     foodCell: state.game.foodCell,
     snake: state.game.snake,
     direction: state.game.direction,
-    score: state.game.score
+    score: state.game.score,
+    highScore: state.game.highScore,
+    userUid: state.auth.user.uid
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGameReady: (payload) => dispatch(actions.gameReady(payload)),
+    onSetGameReady: (userUid, payload) => dispatch(actions.setGameReady(userUid, payload)),
     onGamePlaying: (payload) => dispatch(actions.gamePlaying(payload)),
     onGamePaused: (payload) => dispatch(actions.gamePaused(payload)),
     onChangeSnakeDirection: (direction) => dispatch(actions.changeSnakeDirection(direction))

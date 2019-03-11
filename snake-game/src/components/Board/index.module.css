@@ -1,9 +1,8 @@
 .Board {
-  border: 1px solid blue;
+  border: 1px solid black;
   padding: 16px 12px 12px 16px;
   box-sizing: border-box;
   display: inline-block;
-  background: lightskyblue;
 }
 
 .Row {
@@ -16,16 +15,28 @@
   display: inline-block;
   width: 36px;
   height: 36px;
-  background: lightskyblue;
   /* margin: 0 4px 4px 0; */
 }
 
 .Cell[data-food="true"] {
-  background: lightcoral;
+  /* background: black; */
+  background-image: url('../../assets/icons/heart.svg');
+  border-radius: 30%;
+  animation: heartbeat 500ms infinite alternate;
+}
+
+@keyframes heartbeat {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.2);
+  }
 }
 
 .Cell[data-snake="true"] {
-  background: darkblue;
+  background: black;
   border-radius: 30%;
 }
 

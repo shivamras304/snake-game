@@ -89,7 +89,7 @@ const levelUp = (state, action) => {
   // Defining the logic for levelling up
 
   // Decrease the timesInMillis (Increasing speed) by 50 points
-  const snakeSpeed = state.snakeSpeed > 50 ? state.snakeSpeed - 50 : state.snakeSpeed
+  const snakeSpeed = state.snakeSpeed > 100 ? state.snakeSpeed - 50 : state.snakeSpeed
 
   // Increase the adder for score
   const scoreAdder = state.scoreAdder + 5

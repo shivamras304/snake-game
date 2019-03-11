@@ -1,9 +1,10 @@
 import * as actionTypes from '../actions/actionTypes'
 import updateObject from '../../utils/updateObject'
+import { NULL_USER } from '../../utils/constants'
 
 const initialState = {
   isSignedIn: false,
-  user: null
+  user: NULL_USER
 }
 
 const authSuccessful = (state, action) => {

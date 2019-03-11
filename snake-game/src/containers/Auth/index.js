@@ -5,6 +5,7 @@ import 'firebase/auth'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions'
+import { NULL_USER } from '../../utils/constants'
 
 firebase.initializeApp({
   apiKey: 'AIzaSyBc3wyVR4TULTkuiS9j1XBXQ_4ZcTGV6cY',
@@ -55,6 +56,14 @@ class Auth extends Component {
 
   render() {
 
+    /*
+      TRICK:
+      To improve the UX of signing in with StyledFirebaseAuth UI component,
+      we have set the default user as NULL_USER (string). Once the Authentication
+      happens through firebase, it'll either fail or be successful, assigning user
+      to be null or {userObj} respectively
+    */
+
     return (
       <div className={styles.AuthContainer}>
         {this.props.isSignedIn ?
@@ -65,9 +74,11 @@ class Auth extends Component {
             </div>
           ) :
           (
-            <StyledFirebaseAuth
-              uiConfig={this.uiConfig}
-              firebaseAuth={firebase.auth()} />
+            this.props.user === NULL_USER ? 
+              (<div>Loading</div>) :
+              (<StyledFirebaseAuth
+                uiConfig={this.uiConfig}
+                firebaseAuth={firebase.auth()} />)
           )  
         }
       </div>
@@ -77,7 +88,8 @@ class Auth extends Component {
 
 const mapStateToProps = state => {
   return {
-    isSignedIn: state.auth.isSignedIn
+    isSignedIn: state.auth.isSignedIn,
+    user: state.auth.user
   }
 }
 

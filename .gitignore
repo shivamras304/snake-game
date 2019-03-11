@@ -494,5 +494,6 @@ buck-out/
 .buckversion
 .fakebuckversion
 
+.netlify
 
 # End of https://www.gitignore.io/api/node,django,android,angular,flutter,reactnative,androidstudio

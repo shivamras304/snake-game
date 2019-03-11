@@ -15,3 +15,5 @@ export const GAME_READY = 'GAME_READY'
 export const GAME_PLAYING = 'GAME_PLAYING'
 export const GAME_PAUSED = 'GAME_PAUSED'
 export const GAME_OVER = 'GAME_OVER'
+
+export const NULL_USER = 'NULL_USER'

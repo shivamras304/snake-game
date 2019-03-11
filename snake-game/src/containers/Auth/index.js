@@ -6,6 +6,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions'
 import { NULL_USER } from '../../utils/constants'
+import Spinner from '../../components/Spinner'
 
 firebase.initializeApp({
   apiKey: 'AIzaSyBc3wyVR4TULTkuiS9j1XBXQ_4ZcTGV6cY',
@@ -65,21 +66,17 @@ class Auth extends Component {
     */
 
     return (
-      <div className={styles.AuthContainer}>
-        {this.props.isSignedIn ?
-          (
-            <div>
-              <div>Signed In!</div>
-              <button onClick={this.logOutHandler}>Log out</button>
-            </div>
-          ) :
-          (
-            this.props.user === NULL_USER ? 
-              (<div>Loading</div>) :
-              (<StyledFirebaseAuth
-                uiConfig={this.uiConfig}
-                firebaseAuth={firebase.auth()} />)
-          )  
+      <div>
+        {this.props.user === NULL_USER ? 
+            (<Spinner />) :
+            (
+              <div className={styles.AuthContainer}>
+                <div className={styles.AuthTitle}>PLEASE SIGN IN TO PLAY!</div>
+                <StyledFirebaseAuth
+                  uiConfig={this.uiConfig}
+                  firebaseAuth={firebase.auth()} />
+              </div>
+            )
         }
       </div>
     )

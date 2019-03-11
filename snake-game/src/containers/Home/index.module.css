@@ -54,5 +54,22 @@
 
 .Main {
   flex-grow: 1; 
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  width: 900px;
+  margin: 50px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 900px) {
+  .Main {
+    width: 600px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .Main {
+    width: 100%;
+  }
 }

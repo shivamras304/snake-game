@@ -1,0 +1,12 @@
+.AuthContainer {
+  border: 1px solid black;
+  width: 350px;
+  text-align: center;
+  padding: 60px 0 40px 0;
+}
+
+.AuthTitle {
+  margin-bottom: 50px;
+  font-family: 'Equilibrium';
+  font-size: 18px;
+}

@@ -4,6 +4,8 @@ import ScoreIcon from '../../assets/icons/star.svg'
 import HighscoreIcon from '../../assets/icons/award.svg'
 import LeaderboardIcon from '../../assets/icons/leaderboard.svg'
 import LogoutIcon from '../../assets/icons/logout.svg'
+import EatSound from '../../assets/sounds/eat.mp3'
+import GameOverSound from '../../assets/sounds/over.mp3'
 
 const game = props => (
   <div className={styles.GameInfo}>
@@ -29,6 +31,9 @@ const game = props => (
         <span>{props.highScore}</span>
       </div>
     </div>
+
+    <audio id='eatSound' src={EatSound}></audio>
+    <audio id='gameOverSound' src={GameOverSound}></audio>
   </div>
 )
 

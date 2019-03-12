@@ -51,6 +51,7 @@ export const gamePaused = (payload) => {
 }
 
 export const gameOver = () => {
+  document.getElementById('gameOverSound').play()
   return {
     type: actionTypes.GAME_OVER
   }
@@ -90,6 +91,7 @@ export const changeSnakeDirection = (direction) => {
 }
 
 export const eatFood = (foodCell) => {
+  document.getElementById('eatSound').play()
   return {
     type: actionTypes.EAT_FOOD,
     foodCell: foodCell

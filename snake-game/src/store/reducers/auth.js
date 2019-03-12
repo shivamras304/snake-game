@@ -5,6 +5,8 @@ import { NULL_USER } from '../../utils/constants'
 const initialState = {
   isSignedIn: false,
   user: NULL_USER
+  // user has the following keys
+  // { uid, name, email, photoURL, providerId }
 }
 
 const authSuccessful = (state, action) => {
@@ -24,7 +26,7 @@ const authFailed = (state, action) => {
 const authLogout = (state, action) => {
   return updateObject(state, {
     isSignedIn: false,
-    user: null
+    user: NULL_USER
   })
 }
 

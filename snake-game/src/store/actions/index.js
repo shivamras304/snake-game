@@ -14,5 +14,6 @@ export {
   authSignIn,
   authSuccessful,
   authFailed,
-  authLogout
+  authLogout,
+  logout
 } from './auth'

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import styles from './index.module.css'
 import { connect } from 'react-redux'
 import Board from '../../components/Board'
+import GameInfo from '../../components/GameInfo'
+import Spinner from '../../components/Spinner'
 import { getGridDimensions, getGrid, getFoodCell, getInitialSnake } from '../../game/gameSetup'
 import * as constants from '../../utils/constants'
 import * as actions from '../../store/actions'
@@ -14,7 +16,7 @@ class Game extends Component {
     const foodCell = getFoodCell()
     const snake = getInitialSnake()
 
-    this.props.onSetGameReady(this.props.userUid, {
+    this.props.onSetGameReady(this.props.user.uid, {
       mRows, nCols, grid, foodCell, snake
     })
   }
@@ -79,24 +81,37 @@ class Game extends Component {
   }
 
   render() {
-    let board = null
-    if (this.props.gameState !== constants.GAME_NULL) {
-      board = <Board 
-        grid={this.props.grid}
-        foodCell={this.props.foodCell}
-        snake={this.props.snake} />
+    let game = null
+    if (this.props.gameState !== constants.GAME_NULL && this.props.grid) {
+      game = (
+        <div>
+          <Board 
+            grid={this.props.grid}
+            foodCell={this.props.foodCell}
+            snake={this.props.snake} />
+          <GameInfo
+            user={this.props.user}
+            score={this.props.score}
+            highScore={this.props.highScore}
+            onLogout={this.props.onLogout} />
+        </div>
+      )
+    } else {
+      game = (
+        <Spinner />
+      )
     }
 
     return (
-      <div onKeyDown={this.keyDownHandler}>
-        {board}
-        <div>Score: {this.props.score}</div>
+      <div className={styles.Game} onKeyDown={this.keyDownHandler}>
+        {game}
+        {/* <div>Score: {this.props.score}</div>
         <div>HighScore: {this.props.highScore}</div>
         <br/>
         <button data-state={constants.GAME_PLAYING} className={styles.Button} onClick={this.changeGameStateHandler}>Play Game</button>
         <button data-state={constants.GAME_PAUSED} className={styles.Button} onClick={this.changeGameStateHandler}>Pause Game</button>
         <button data-state={constants.GAME_OVER} className={styles.Button} onClick={this.changeGameStateHandler}>Finish Game</button>
-        <br/>
+        <br/> */}
       </div>
     )
   }
@@ -113,7 +128,7 @@ const mapStateToProps = state => {
     direction: state.game.direction,
     score: state.game.score,
     highScore: state.game.highScore,
-    userUid: state.auth.user.uid
+    user: state.auth.user
   }
 }
 
@@ -122,7 +137,8 @@ const mapDispatchToProps = dispatch => {
     onSetGameReady: (userUid, payload) => dispatch(actions.setGameReady(userUid, payload)),
     onGamePlaying: (payload) => dispatch(actions.gamePlaying(payload)),
     onGamePaused: (payload) => dispatch(actions.gamePaused(payload)),
-    onChangeSnakeDirection: (direction) => dispatch(actions.changeSnakeDirection(direction))
+    onChangeSnakeDirection: (direction) => dispatch(actions.changeSnakeDirection(direction)),
+    onLogout: () => dispatch(actions.logout())
   }
 }
 

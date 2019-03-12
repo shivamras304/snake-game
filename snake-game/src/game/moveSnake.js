@@ -9,6 +9,12 @@ const moveSnake = () => {
   // It is caused when two changeSnakeDirection(s) are called in succession without a 
   // moveSnake called in between. Make sure that every changeSnakeDirection is followed
   // by a moveSnake or atleast coupled with it
+  // TODO: Try this => A possible solution
+  // Use action creator for changeSnakeDirection, clearInterval for moveSnake, call moveSnake,
+  // and again addInterval for moveSnake
+
+
+
   const currentGameState = store.getState()
 
   // This is a very important step. Never mutate the state directly and be aware of 
@@ -58,6 +64,4 @@ const moveSnake = () => {
   }
 }
 
-export {
-  moveSnake
-}
+export default moveSnake

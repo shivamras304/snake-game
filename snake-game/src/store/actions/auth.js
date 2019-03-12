@@ -5,7 +5,7 @@ export const authSignIn = (user) => {
   return dispatch => {
       firebase.firestore().collection('users').doc(user.uid)
       .set({
-        name: user.displayName,
+        displayName: user.displayName,
         email: user.email,
         photoURL: user.photoURL,
         providerId: user.providerId
@@ -36,5 +36,11 @@ export const authFailed = () => {
 export const authLogout = () => {
   return {
     type: actionTypes.AUTH_LOGOUT
+  }
+}
+
+export const logout = () => {
+  return dispatch => {
+    
   }
 }

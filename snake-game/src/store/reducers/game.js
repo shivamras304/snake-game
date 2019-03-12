@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes'
 import updateObject from '../../utils/updateObject'
 import * as constants from '../../utils/constants'
-import { moveSnake as moveSnakeHelper } from '../../game/moveSnake'
+import moveSnakeHelper from '../../game/moveSnake'
 import { getInitialSnake, getFoodCell } from '../../game/gameSetup'
 
 // TODO: Move all logic from reducers to actions

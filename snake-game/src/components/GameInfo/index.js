@@ -17,7 +17,7 @@ const game = props => (
       </div>
       <div className={styles.UserControls}>
         <div onClick={props.onLogout}><img src={LogoutIcon} alt="Logout"/></div>
-        <div><img src={LeaderboardIcon} alt="Leaderboard"/></div>
+        <div onClick={props.onLbToggle} data-active={props.lbOpen}><img src={LeaderboardIcon} alt="Leaderboard"/></div>
       </div>
     </div>
 

@@ -11,3 +11,7 @@ export const LEVEL_UP = 'LEVEL_UP'
 export const AUTH_SUCCESSFUL = 'AUTH_SUCCESSFUL'
 export const AUTH_FAILED = 'AUTH_FAILED'
 export const AUTH_LOGOUT = 'AUTH_LOGOUT'
+
+export const LB_OPEN = 'LB_OPEN'
+export const LB_LOADED = 'LB_LOADED'
+export const LB_CLOSE = 'LB_CLOSE'

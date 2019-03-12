@@ -7,6 +7,7 @@ import Spinner from '../../components/Spinner'
 import { getGridDimensions, getGrid, getFoodCell, getInitialSnake } from '../../game/gameSetup'
 import * as constants from '../../utils/constants'
 import * as actions from '../../store/actions'
+import Leaderboard from '../Leaderboard'
 
 class Game extends Component {
 
@@ -101,6 +102,14 @@ class Game extends Component {
     }
   }
 
+  onLbToggleHandler = () => {
+    if (this.props.lbOpen) {
+      this.props.onLeaderBoardClose()
+    } else {
+      this.props.onLeaderBoardOpen()
+    }
+  }
+
   render() {
     let game = null
     if (this.props.gameState !== constants.GAME_NULL && this.props.grid) {
@@ -117,11 +126,19 @@ class Game extends Component {
                   <span>{this.state.loadGameText}</span>
                 </div>
               ) : null}
+            {this.props.lbOpen ? 
+              (
+                <div className={styles.LeaderboardContainer}>
+                  <Leaderboard />
+                </div>
+              ) : null}
           </div>
           <GameInfo
             user={this.props.user}
             score={this.props.score}
             highScore={this.props.highScore}
+            onLbToggle={this.onLbToggleHandler}
+            lbOpen={this.props.lbOpen}
             onLogout={this.props.onLogout} />
         </div>
       )
@@ -154,7 +171,8 @@ const mapStateToProps = state => {
     direction: state.game.direction,
     score: state.game.score,
     highScore: state.game.highScore,
-    user: state.auth.user
+    user: state.auth.user,
+    lbOpen: state.lb.isOpen
   }
 }
 
@@ -164,7 +182,9 @@ const mapDispatchToProps = dispatch => {
     onGamePlaying: (payload) => dispatch(actions.gamePlaying(payload)),
     onGamePaused: (payload) => dispatch(actions.gamePaused(payload)),
     onChangeSnakeDirection: (direction) => dispatch(actions.changeSnakeDirection(direction)),
-    onLogout: () => dispatch(actions.logout())
+    onLogout: () => dispatch(actions.logout()),
+    onLeaderBoardOpen: () => dispatch(actions.lbOpen()),
+    onLeaderBoardClose: () => dispatch(actions.lbClose())
   }
 }
 

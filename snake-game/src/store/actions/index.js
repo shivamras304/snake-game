@@ -17,3 +17,9 @@ export {
   authLogout,
   logout
 } from './auth'
+
+export {
+  lbOpen,
+  lbClose,
+  lbLoad
+} from './leaderboard'

@@ -9,11 +9,13 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 import gameReducer from './store/reducers/game'
 import authReducer from './store/reducers/auth'
+import leaderBoardReducer from './store/reducers/leaderboard'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
   game: gameReducer,
-  auth: authReducer
+  auth: authReducer,
+  lb: leaderBoardReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(

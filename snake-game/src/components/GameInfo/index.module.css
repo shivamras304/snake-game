@@ -32,7 +32,7 @@
   transition: all 200ms ease-in;
 }
 
-.UserControls div:hover {
+.UserControls div:hover, [data-active='true'] {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.2);
 }

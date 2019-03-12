@@ -41,6 +41,12 @@ export const authLogout = () => {
 
 export const logout = () => {
   return dispatch => {
-    
+    firebase.auth()
+      .signOut()
+      .then(() => dispatch(authLogout()))
+      .catch(error => {
+        console.log(error)
+        dispatch(authLogout())
+      })
   }
 }

@@ -14,8 +14,6 @@ export const setGameReady = (userUid, payload) => {
     firebase.firestore().collection('users').doc(userUid)
       .get()
       .then(doc => {
-        console.log(doc.data())
-        console.log(payload)
         dispatch(gameReady({
           ...payload,
           highScore: doc.data().highScore || 0

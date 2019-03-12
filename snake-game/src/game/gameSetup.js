@@ -36,7 +36,7 @@ const getGrid = () => {
       grid[i].push(cell)
     }
   }
-  printGrid(grid)
+  // printGrid(grid)
   return grid
 }
 

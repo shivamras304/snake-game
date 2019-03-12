@@ -27,6 +27,9 @@ const moveSnake = () => {
   const grid = currentGameState.game.grid
   let foodCell = currentGameState.game.foodCell
   const score = currentGameState.game.score
+  const freezeSnake = currentGameState.game.freezeSnake
+  const snakeSpeed = currentGameState.game.snakeSpeed
+  const scoreAdder = currentGameState.game.scoreAdder
   let highScore = currentGameState.game.highScore
   const userUid = currentGameState.auth.user.uid
 
@@ -46,7 +49,11 @@ const moveSnake = () => {
 
     if ((snake.length - 3) % 5 === 0 && snake.length > 5) {
       // Levelling up after every 5 meals
-      store.dispatch(levelUp())
+      store.dispatch(levelUp({
+        snakeSpeed,
+        scoreAdder,
+        freezeSnake
+      }))
     }
   } else {
     // Clipping the tail
@@ -57,7 +64,7 @@ const moveSnake = () => {
     if (!highScore || score > highScore) {
       highScore = score
     }
-    store.dispatch(gameOver())
+    store.dispatch(gameOver({freezeSnake}))
     store.dispatch(updateHighScore(userUid, highScore))
   } else {
     store.dispatch(moveSnakeAction(snake))

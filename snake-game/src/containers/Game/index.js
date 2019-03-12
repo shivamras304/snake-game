@@ -34,26 +34,15 @@ class Game extends Component {
     window.removeEventListener('keydown', this.keyDownHandler)
   }
 
-  changeGameStateHandler = (event) => {
-
-    switch (event.target.dataset.state) {
-      case constants.GAME_PLAYING: this.props.onGamePlaying() 
-        break;
-      case constants.GAME_PAUSED: this.props.onGamePaused() 
-        break;
-      case constants.GAME_OVER: this.props.onGameOver() 
-        break;
-      default:
-        return
-    }
-  }
-
   loadGameHandlder = () => {
     this.setState({
       loadGame: false
     })
 
-    this.props.onGamePlaying()
+    this.props.onGamePlaying({
+      freezeSnake: this.props.freezeSnake,
+      snakeSpeed: this.props.snakeSpeed
+    })
   }
 
   keyDownHandler = (event) => {
@@ -74,9 +63,14 @@ class Game extends Component {
       case 32: // Spacebar is pressed
         if (this.props.gameState === constants.GAME_PAUSED
            || this.props.gameState === constants.GAME_READY) {
-          this.props.onGamePlaying()
+          this.props.onGamePlaying({
+            freezeSnake: this.props.freezeSnake,
+            snakeSpeed: this.props.snakeSpeed
+          })
         } else if (this.props.gameState === constants.GAME_PLAYING) {
-          this.props.onGamePaused()
+          this.props.onGamePaused({
+            freezeSnake: this.props.freezeSnake
+          })
         }
         break;
       case 37: // Left Arrow key is pressed
@@ -155,6 +149,8 @@ const mapStateToProps = state => {
     grid: state.game.grid,
     foodCell: state.game.foodCell,
     snake: state.game.snake,
+    snakeSpeed: state.game.snakeSpeed,
+    freezeSnake: state.game.freezeSnake,
     direction: state.game.direction,
     score: state.game.score,
     highScore: state.game.highScore,

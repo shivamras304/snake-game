@@ -1,7 +1,6 @@
 import * as actionTypes from '../actions/actionTypes'
 import updateObject from '../../utils/updateObject'
 import * as constants from '../../utils/constants'
-import moveSnakeHelper from '../../game/moveSnake'
 
 // TODO: Move all logic from reducers to actions
 // Reducers should only be pure functions
@@ -36,21 +35,13 @@ const gameReady = (state, action) => {
 }
 
 const gamePlaying = (state, action) => {
-
-  const freezeSnake = setInterval(() => {
-    moveSnakeHelper()
-  }, state.snakeSpeed)
-
   return updateObject(state, {
     gameState: constants.GAME_PLAYING,
-    freezeSnake: freezeSnake
+    freezeSnake: action.freezeSnake
   })
 }
 
 const gamePaused = (state, action) => {
-
-  clearInterval(state.freezeSnake)
-
   return updateObject(state, {
     gameState: constants.GAME_PAUSED,
     freezeSnake: null
@@ -58,9 +49,6 @@ const gamePaused = (state, action) => {
 }
 
 const gameOver = (state, action) => {
-
-  clearInterval(state.freezeSnake)
-
   return updateObject(state, {
     gameState: constants.GAME_OVER,
     freezeSnake: null
@@ -92,24 +80,10 @@ const eatFood = (state, action) => {
 }
 
 const levelUp = (state, action) => {
-  // Defining the logic for levelling up
-
-  // Decrease the timesInMillis (Increasing speed) by 50 points
-  const snakeSpeed = state.snakeSpeed > 150 ? state.snakeSpeed - 50 : state.snakeSpeed
-
-  // Increase the adder for score
-  const scoreAdder = state.scoreAdder + 5
-
-  clearInterval(state.freezeSnake)
-
-  const freezeSnake = setInterval(() => {
-    moveSnakeHelper()
-  }, snakeSpeed)
-  
   return updateObject(state, {
-    snakeSpeed,
-    scoreAdder,
-    freezeSnake
+    snakeSpeed: action.snakeSpeed,
+    scoreAdder: action.scoreAdder,
+    freezeSnake: action.freezeSnake
   })
 }
 

@@ -1,0 +1,76 @@
+.Leaderboard {
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.Title {
+  font-size: 24px;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+table, tbody {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+td {
+  padding: 4px 8px;
+}
+
+.Rank {
+  margin-right: 12px;
+}
+
+.PhotoContainer {
+  width: 50px;
+}
+
+.Photo {
+  height: 32px;
+  border-radius: 50%;
+}
+
+.Highscore {
+  text-align: center;
+}
+
+.Spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+
+@media only screen and (max-width: 600px) {
+  .Leaderboard {
+    padding: 8px;
+  }
+
+  .Title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  td {
+    padding: 0;
+  }
+
+  .Rank {
+    display: none;
+  }
+
+  .PhotoContainer {
+    width: 50px;
+  }
+  
+  .Photo {
+    height: 24px;
+    border-radius: 50%;
+  }
+}

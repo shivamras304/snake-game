@@ -15,7 +15,7 @@ export const lbClose = () => {
 
 export const lbLoaded = (data) => {
   return {
-    type: actionTypes.LB_OPEN,
+    type: actionTypes.LB_LOADED,
     data: data
   }
 }
@@ -25,7 +25,13 @@ export const lbLoad = () => {
     firebase.firestore().collection('users')
       .orderBy('highScore', 'desc')
       .limit(5)
-      .then(data => console.log(data))
+      .get()
+      .then(querySnapshot => {
+        const data = []
+        querySnapshot.forEach(doc => data.push(doc.data()))
+        console.log(data)
+        dispatch(lbLoaded(data))
+      })
       .catch(error => console.log(error))
   }
 }

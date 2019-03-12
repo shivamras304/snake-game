@@ -50,16 +50,16 @@ const verifyValue = (value, direction) => {
   }
 }
 
-const printGrid = (grid) => {
-  for (let i=0; i < mRows; i++) {
-    let row = '|'
-    for (let j=0; j < nCols; j++) {
-      row += ' ' + (grid[i][j].value < 10 ? '0' + grid[i][j].value : grid[i][j].value) + ' |'
-    }
-    console.log(row)
-    console.log()
-  }
-}
+// const printGrid = (grid) => {
+//   for (let i=0; i < mRows; i++) {
+//     let row = '|'
+//     for (let j=0; j < nCols; j++) {
+//       row += ' ' + (grid[i][j].value < 10 ? '0' + grid[i][j].value : grid[i][j].value) + ' |'
+//     }
+//     console.log(row)
+//     console.log()
+//   }
+// }
 
 /**
  * This method randomly select any cell in the grid

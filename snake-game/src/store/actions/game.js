@@ -1,7 +1,17 @@
 import * as actionTypes from './actionTypes'
 import firebase from '../../utils/initFirebase'
+import { getFoodCell, getInitialSnake } from '../../game/gameSetup';
 
 export const gameReady = (payload) => {
+
+  if (!payload.foodCell) {
+    payload.foodCell = getFoodCell()
+  }
+
+  if(!payload.snake) {
+    payload.snake = getInitialSnake()
+  }
+
   return {
     type: actionTypes.GAME_READY,
     ...payload

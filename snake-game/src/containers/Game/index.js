@@ -11,6 +11,8 @@ import * as actions from '../../store/actions'
 class Game extends Component {
 
   componentDidMount() {
+    this.gamediv.focus()
+
     const { mRows, nCols } = getGridDimensions()
     const grid = getGrid()
     const foodCell = getFoodCell()
@@ -19,6 +21,12 @@ class Game extends Component {
     this.props.onSetGameReady(this.props.user.uid, {
       mRows, nCols, grid, foodCell, snake
     })
+
+    window.addEventListener('keydown', this.keyDownHandler)
+  }
+
+  componentWillMount() {
+    window.removeEventListener('keydown', this.keyDownHandler)
   }
 
   changeGameStateHandler = (event) => {
@@ -36,6 +44,7 @@ class Game extends Component {
   }
 
   keyDownHandler = (event) => {
+    console.log('Clicked!')
     event.preventDefault()
     
     // Arrow keys should work only when the game is in playing mode
@@ -103,15 +112,10 @@ class Game extends Component {
     }
 
     return (
-      <div className={styles.Game} onKeyDown={this.keyDownHandler}>
+      <div 
+        className={styles.Game}
+        ref={(gamediv => this.gamediv = gamediv)}>
         {game}
-        {/* <div>Score: {this.props.score}</div>
-        <div>HighScore: {this.props.highScore}</div>
-        <br/>
-        <button data-state={constants.GAME_PLAYING} className={styles.Button} onClick={this.changeGameStateHandler}>Play Game</button>
-        <button data-state={constants.GAME_PAUSED} className={styles.Button} onClick={this.changeGameStateHandler}>Pause Game</button>
-        <button data-state={constants.GAME_OVER} className={styles.Button} onClick={this.changeGameStateHandler}>Finish Game</button>
-        <br/> */}
       </div>
     )
   }

@@ -2,7 +2,6 @@ import * as actionTypes from '../actions/actionTypes'
 import updateObject from '../../utils/updateObject'
 import * as constants from '../../utils/constants'
 import moveSnakeHelper from '../../game/moveSnake'
-import { getInitialSnake, getFoodCell } from '../../game/gameSetup'
 
 // TODO: Move all logic from reducers to actions
 // Reducers should only be pure functions
@@ -28,8 +27,9 @@ const gameReady = (state, action) => {
     mRows: action.mRows || state.mRows,
     nCols: action.nCols || state.nCols,
     grid: action.grid || state.grid,
-    foodCell: action.foodCell || getFoodCell(),
-    snake: action.snake || getInitialSnake(),
+    foodCell: action.foodCell,
+    snake: action.snake,
+    snakeSpeed: 500,
     score: 0,
     highScore: action.highScore
   })
@@ -95,7 +95,7 @@ const levelUp = (state, action) => {
   // Defining the logic for levelling up
 
   // Decrease the timesInMillis (Increasing speed) by 50 points
-  const snakeSpeed = state.snakeSpeed > 100 ? state.snakeSpeed - 50 : state.snakeSpeed
+  const snakeSpeed = state.snakeSpeed > 150 ? state.snakeSpeed - 50 : state.snakeSpeed
 
   // Increase the adder for score
   const scoreAdder = state.scoreAdder + 5

@@ -6,7 +6,7 @@ const initialState = {
   isSignedIn: false,
   user: NULL_USER
   // user has the following keys
-  // { uid, name, email, photoURL, providerId }
+  // { uid, displayName, email, photoURL, providerId }
 }
 
 const authSuccessful = (state, action) => {

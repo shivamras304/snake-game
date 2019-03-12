@@ -65,3 +65,10 @@
 .ScoreContainer img, .HighscoreContainer img {
   height: 24px;
 }
+
+@media only screen and (max-width: 600px) {
+  .ScoreContainer, .HighscoreContainer, .UserName {
+    font-size: 18px;
+    width: 70px;
+  }
+}

@@ -13,7 +13,7 @@ const game = props => (
     <div>
       <div className={styles.UserInfo}>
         <img className={styles.UserPhoto} src={props.user.photoURL} alt="User"/>
-        <div>{props.user.displayName.split(' ')[0]}</div>
+        <div className={styles.UserName}>{props.user.displayName.split(' ')[0]}</div>
       </div>
       <div className={styles.UserControls}>
         <div onClick={props.onLogout}><img src={LogoutIcon} alt="Logout"/></div>

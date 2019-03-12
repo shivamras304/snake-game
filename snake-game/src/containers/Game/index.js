@@ -10,6 +10,11 @@ import * as actions from '../../store/actions'
 
 class Game extends Component {
 
+  state = {
+    loadGame: true,
+    loadGameText: 'PRESS SPACEBAR TO START GAME'
+  }
+
   componentDidMount() {
     this.gamediv.focus()
 
@@ -43,8 +48,21 @@ class Game extends Component {
     }
   }
 
+  loadGameHandlder = () => {
+    this.setState({
+      loadGame: false
+    })
+
+    this.props.onGamePlaying()
+  }
+
   keyDownHandler = (event) => {
-    console.log('Clicked!')
+
+    if (this.state.loadGame) {
+      this.loadGameHandlder()
+      return;
+    }
+
     event.preventDefault()
     
     // Arrow keys should work only when the game is in playing mode
@@ -94,10 +112,18 @@ class Game extends Component {
     if (this.props.gameState !== constants.GAME_NULL && this.props.grid) {
       game = (
         <div>
-          <Board 
-            grid={this.props.grid}
-            foodCell={this.props.foodCell}
-            snake={this.props.snake} />
+          <div className={styles.BoardContainer}>
+            <Board 
+              grid={this.props.grid}
+              foodCell={this.props.foodCell}
+              snake={this.props.snake} />
+            {this.state.loadGame ? 
+              (
+                <div className={styles.GameLoader}>
+                  <span>{this.state.loadGameText}</span>
+                </div>
+              ) : null}
+          </div>
           <GameInfo
             user={this.props.user}
             score={this.props.score}

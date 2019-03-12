@@ -58,7 +58,6 @@ export const gameOver = () => {
 }
 
 export const updateHighScore = (userUid, highScore) => {
-  console.log(userUid, highScore)
   return dispatch => {
     firebase.firestore().collection('users').doc(userUid)
     .set({
